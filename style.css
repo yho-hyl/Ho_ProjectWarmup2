@@ -1,0 +1,19 @@
+body {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#scene-image {
+    width: 400px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+#scene-text {
+    max-width: 600px;
+    margin: auto;
+    line-height: 1.6;
+}

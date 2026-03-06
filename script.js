@@ -1,30 +1,76 @@
-const bedroom = {
-    image: "image/bedroom.jpg",
-    text: "old cloth and damaged wall",
-    choices: "Go out the room"
+const storyNodes = [
+
+{
+    image: "images/entrance.jpg",
+    text: "You stand inside the entrance of the abandoned house.",
+    choices: [
+        {text: "Walk into the hallway", next: 1},
+        {text: "Go into the bedroom", next: 2}
+    ]
+},
+
+{
+    image: "images/hallway.jpg",
+    text: "The hallway stretches into darkness.",
+    choices: [
+        {text: "Go stairs", next: 3},
+        {text: "Return to the entrance", next: 0}
+    ]
+},
+
+{
+    image: "images/bedroom.jpg",
+    text: "The bedroom smells like rust and dust.",
+    choices: [
+        {text: "Return to the entrance", next: 0}
+    ]
+},
+
+{
+    image: "images/stairs.jpg",
+    text: "The stairs landing creaks beneath your feet.",
+    choices: [
+        {text: "Go back to the hallway", next: 1}
+    ]
 }
 
-const enterence = {
-    image: "image/enterence.jpg",
-    text: "old cloth and damaged wall",
-    choices: "Go into the room"
+];
+
+function displayNode(index) {
+
+    const node = storyNodes[index];
+
+    const imageElement = document.getElementById("scene-image");
+    const textElement = document.getElementById("scene-text");
+    const choicesContainer = document.getElementById("choices-container");
+
+    imageElement.src = node.image;
+    textElement.textContent = node.text;
+
+    choicesContainer.innerHTML = "";
+
+    if (node.choices.length === 0) {
+
+        const message = document.createElement("p");
+        message.textContent = "There is no way forward.";
+        choicesContainer.appendChild(message);
+
+    } else {
+
+        node.choices.forEach(choice => {
+
+            const button = document.createElement("button");
+            button.textContent = choice.text;
+
+            button.onclick = function () {
+                displayNode(choice.next);
+            };
+
+            choicesContainer.appendChild(button);
+
+        });
+
+    }
 }
 
-const hallway = {
-    image: "image/hallway.jpg",
-    text: "old cloth and damaged wall",
-    choices: "Go down the hallway"
-}
-
-const stairs = {
-    image: "image/stairs.jpg",
-    text: "old cloth and damaged wall",
-    choices: "Go up the starirs"
-}
-
-let storyNodes = [bedroom, enterence, hallway, stairs];
-console.log(bedroom.image);
-
-function displayNode(){
-    
-}
+displayNode(0);
